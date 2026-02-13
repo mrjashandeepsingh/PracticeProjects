@@ -1,141 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Table</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            table-layout: fixed;
-            text-align: center;
-            font-size: large;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSE-D Schedule Dashboard</title>
 
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-        tr,
-        th,
-        td {
-            border: 3px solid #0FA4AF;
-            width: 8vw;
-            height: 6vh;
+<style>
+:root {
+  --bg1: #0f172a;
+  --bg2: #1e293b;
+  --text: #f1f5f9;
+  --card: rgba(255,255,255,0.08);
+}
 
-        }
-        h1,th{
-            color: #964734;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        td{
-            color: #024950;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight:600;
-        }
-    </style>
+.light {
+  --bg1: #f8fafc;
+  --bg2: #e2e8f0;
+  --text: #0f172a;
+  --card: rgba(0,0,0,0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  color: var(--text);
+  background: linear-gradient(-45deg, #0ea5e9, #8b5cf6, #ec4899, #06b6d4);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Animated Gradient */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Noise Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Container */
+.wrapper {
+  width: 100%;
+  max-width: 1400px;
+  backdrop-filter: blur(30px);
+  background: var(--card);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Toggle Button */
+.toggle {
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: 120px repeat(8, 1fr);
+  gap: 12px;
+}
+
+/* Cells */
+.cell {
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  background: var(--card);
+  transition: 0.3s ease;
+}
+
+.cell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Subject Colors */
+.python { background: rgba(59,130,246,0.3); }
+.maths { background: rgba(139,92,246,0.3); }
+.chemistry { background: rgba(236,72,153,0.3); }
+.english { background: rgba(16,185,129,0.3); }
+.workshop { background: rgba(245,158,11,0.3); }
+.lab { background: rgba(34,197,94,0.3); }
+.break { background: rgba(148,163,184,0.3); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
 </head>
 
-<body style="background: linear-gradient(
-    135deg,
-    #0f172a,
-    #1e293b
-  );
-  font-family: 'Inter', sans-serif;">
-    <div>
-        <table>
-            <h1>Time Table CSE - D</h1>
-            <thead>
-                <tr>
-                    <th rowspan="2"></th>
-                    <th colspan="">1</th>
-                    <th colspan="">2</th>
-                    <th colspan="">3</th>
-                    <th colspan="">4</th>
-                    <th colspan="">5</th>
-                    <th colspan="">6</th>
-                    <th colspan="">7</th>
-                    <th colspan="">8</th>
-                </tr>
-                <tr>
-                    <th style="font-size: x-small;">9:15 - 10:10</th>
-                    <th style="font-size: xx-small;">10:10 -11:05</th>
-                    <th style="font-size: x-small;">11:05 - 12:00</th>
-                    <th style="font-size: x-small;">12:00 - 12:55</th>
-                    <th style="font-size: x-small;">12:55 - 13:50</th>
-                    <th style="font-size: x-small;">13:50 - 14:45</th>
-                    <th style="font-size: x-small;">14:45 - 15:40</th>
-                    <th style="font-size: x-small;">15:40 - 16:35</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th rowspan="2 ">Monday</th>
-                    <td rowspan="2 " colspan="2">WorkShop</td>
-                    <td rowspan="2 ">Maths </td>
-                    <td rowspan="2 ">BREAK</td>
-                    <td rowspan="2 ">English</td>
-                    <td rowspan="2 ">Python</td>
-                    <td rowspan="2 ">Chemistry</td>
-                    <td rowspan="2 " style="color: #AfDDE5;">Chemistry</td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <th rowspan="2">Tuesday</th>
-                    <td rowspan="2">English</td>
-                    <td rowspan="2">Maths</td>
-                    <td rowspan="2">Chemistry</td>
-                    <td rowspan="2">BREAK</td>
-                    <td rowspan="2">Python</td>
-                    <td rowspan="2">Maths</td>
-                    <td rowspan="2">Library</td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <th rowspan="2">Wednesday</th>
-                    <td rowspan="2">English</td>
-                    <td rowspan="2">Maths</td>
-                    <td rowspan="2">Python</td>
-                    <td rowspan="2">BREAK</td>
-                    <td colspan="2">Eng Lab</td>
-                    <td rowspan="2">Chemistry</td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">Python Lab</td>
-                </tr>
-                <tr>
-                    <th rowspan="2">Thursday</th>
-                    <td colspan="2">Python Lab </td>
-                    <td rowspan="2">Maths</td>
-                    <td>Maths</td>
-                    <td rowspan="2">BREAK</td>
-                    <td rowspan="2"></td>
-                    <td rowspan="2"></td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">Chem Lab</td>
-                    <td>Chemistry</td>
-                </tr>
-                <tr>
-                    <th rowspan="2">Friday</th>
-                    <td colspan="2">Chem Lab</td>
-                    <td rowspan="2">Maths</td>
-                    <td rowspan="2">BREAK</td>
-                    <td rowspan="2">Chemistry</td>
-                    <td>Chemistry</td>
-                    <td colspan="2" rowspan="2">WorkShop</td>
-                </tr>
-                <tr>
-                    <td colspan="2">Eng Lab</td>
-                    <td>Maths</td>
-                </tr>
+<body>
 
-            </tbody>
-        </table>
-    </div>
-    <!-- <img style="position: fixed; top: 10px; right: 10px; width: 60px !important; height: 60px !important;
-        object-fit: contain;" src="collegelogo.jpeg" alt="imagelogo"> -->
+<div class="wrapper">
+
+<div class="header">
+  <h1>CSE-D Weekly Dashboard</h1>
+  <button class="toggle" onclick="toggleTheme()">Toggle Mode</button>
+</div>
+
+<div class="grid">
+
+<div class="cell"><strong>Day</strong></div>
+<div class="cell">1</div>
+<div class="cell">2</div>
+<div class="cell">3</div>
+<div class="cell">4</div>
+<div class="cell">5</div>
+<div class="cell">6</div>
+<div class="cell">7</div>
+<div class="cell">8</div>
+
+<div class="cell"><strong>Monday</strong></div>
+<div class="cell workshop">Workshop</div>
+<div class="cell workshop">Workshop</div>
+<div class="cell maths">Maths</div>
+<div class="cell break">Break</div>
+<div class="cell english">English</div>
+<div class="cell python">Python</div>
+<div class="cell chemistry">Chemistry</div>
+<div class="cell"></div>
+
+<div class="cell"><strong>Tuesday</strong></div>
+<div class="cell english">English</div>
+<div class="cell maths">Maths</div>
+<div class="cell chemistry">Chemistry</div>
+<div class="cell break">Break</div>
+<div class="cell python">Python</div>
+<div class="cell maths">Maths</div>
+<div class="cell">Library</div>
+<div class="cell"></div>
+
+</div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+</script>
+
 </body>
-
 </html>
